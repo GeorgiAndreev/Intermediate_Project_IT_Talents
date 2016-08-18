@@ -23,8 +23,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "\nEvent \nname =" + name + ", \ndescription =" + description + ", \nfreeSpaces =" + freeSpaces + ", \ncapacity ="
-				+ capacity + ", \nprice =" + price;
+		return "\nEvent \nname = " + name + ", \ndescription = " + description + ", \nfreeSpaces = " + freeSpaces + ", \ncapacity = "
+				+ capacity + ", \nprice = " + price;
 	}
 
 	public void addTeacher(LoggedAccount teacher) {
