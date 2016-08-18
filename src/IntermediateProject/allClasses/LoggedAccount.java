@@ -16,6 +16,7 @@ public class LoggedAccount {
 	private HashSet<Event> eventsITeachIn;
 	private HashSet<Product> productsISell;
 	private float money;
+	private String phoneNumber;
 
 	public void logout() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
