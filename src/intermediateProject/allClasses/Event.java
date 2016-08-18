@@ -23,24 +23,24 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [name=" + name + ", description=" + description + ", freeSpaces=" + freeSpaces + ", capacity="
-				+ capacity + ", price=" + price + "]";
+		return "\nEvent \nname =" + name + ", \ndescription =" + description + ", \nfreeSpaces =" + freeSpaces + ", \ncapacity ="
+				+ capacity + ", \nprice =" + price;
 	}
 
 	public void addTeacher(LoggedAccount teacher) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.teachers.add(teacher);
 	}
 
 	public void removeTeacher(LoggedAccount teacher) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.teachers.remove(teacher);
 	}
 
 	public void addParticipant(LoggedAccount participant) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.participants.add(participant);
 	}
 
 	public void removeParticipant(LoggedAccount participant) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.participants.remove(participant);
 	}
 
 }
