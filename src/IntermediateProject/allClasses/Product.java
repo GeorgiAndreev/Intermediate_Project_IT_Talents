@@ -11,4 +11,12 @@ public class Product {
 	private LoggedAccount seller;
 	private int quantity;
 
+	public void decreaseQuantity(int quantity) {
+		throw new UnsupportedOperationException("The method is not implemented yet.");
+	}
+
+	public void increaseQuantity(int quantity) {
+		throw new UnsupportedOperationException("The method is not implemented yet.");
+	}
+
 }

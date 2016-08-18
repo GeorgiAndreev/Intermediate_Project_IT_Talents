@@ -6,7 +6,7 @@ import java.util.*;
 public class System {
 
 	private HashSet<Event> allEvents;
-	private HashSet<GuestAccount> allUsers;
+	private HashMap<String, LoggedAccount> allAccounts;
 	private Shop shop;
 
 }
