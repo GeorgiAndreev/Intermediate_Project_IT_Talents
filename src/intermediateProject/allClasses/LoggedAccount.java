@@ -42,8 +42,8 @@ public class LoggedAccount {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public void createEvent(Event event) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public Event createEvent(String name, String description, int capacity, float price) {
+		return new Event(name, description, capacity, price);
 	}
 
 	public void removeEvent(Event event) {

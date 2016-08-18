@@ -13,6 +13,13 @@ public class Event {
 	private HashSet<LoggedAccount> teachers;
 	private HashSet<LoggedAccount> participants;
 
+	public Event(String name, String description, int capacity, float price) {
+		this.name = name;
+		this.description = description;
+		this.capacity = capacity;
+		this.price = price;
+	}
+
 	public void addTeacher(LoggedAccount teacher) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
