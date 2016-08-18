@@ -3,7 +3,7 @@ package intermediateProject.allClasses;
 import java.io.*;
 import java.util.*;
 
-public class System {
+public class WebsiteSystem {
 
 	private HashSet<Event> allEvents;
 	private HashMap<String, LoggedAccount> allAccounts;

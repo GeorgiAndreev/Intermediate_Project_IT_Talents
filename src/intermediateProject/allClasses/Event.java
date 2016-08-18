@@ -17,7 +17,14 @@ public class Event {
 		this.name = name;
 		this.description = description;
 		this.capacity = capacity;
+		this.freeSpaces = capacity;
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [name=" + name + ", description=" + description + ", freeSpaces=" + freeSpaces + ", capacity="
+				+ capacity + ", price=" + price + "]";
 	}
 
 	public void addTeacher(LoggedAccount teacher) {
