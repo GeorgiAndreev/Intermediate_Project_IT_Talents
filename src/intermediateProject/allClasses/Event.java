@@ -1,4 +1,4 @@
-package intermediateProject.allClasses;
+package src.intermediateProject.allClasses;
 
 import java.io.*;
 import java.util.*;

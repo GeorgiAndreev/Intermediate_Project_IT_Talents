@@ -1,4 +1,4 @@
-package intermediateProject.allClasses;
+package src.intermediateProject.allClasses;
 
 public class AdminAccount extends LoggedAccount{
 

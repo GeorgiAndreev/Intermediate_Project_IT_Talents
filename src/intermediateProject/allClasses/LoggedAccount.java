@@ -1,7 +1,11 @@
-package intermediateProject.allClasses;
+package src.intermediateProject.allClasses;
 
 import java.io.*;
 import java.util.*;
+
+import src.intermediateProject.allExceptions.CartException;
+import src.intermediateProject.allExceptions.ProductException;
+import src.intermediateProject.allExceptions.UserException;
 
 public class LoggedAccount extends GuestAccount{
 
@@ -12,11 +16,22 @@ public class LoggedAccount extends GuestAccount{
 	private String lastName;
 	private String address;
 	private Cart cart;
-	private HashSet<Event> eventsIParticipateIn;
-	private HashSet<Event> eventsITeachIn;
-	private HashSet<Product> productsISell;
+	private Set<Event> eventsIParticipateIn=new HashSet<Event>();
+	private Set<Event> eventsITeachIn=new HashSet<Event>();
+	private Shop shop;
 	private float money;
 	private String phoneNumber;
+
+	public LoggedAccount(){
+		
+	}
+	
+	public LoggedAccount(String username, Shop shop, float money) {
+		this.username = username;
+		this.cart = new Cart();
+		this.shop = shop;
+		this.money = money;
+	}
 
 	public void logout() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
@@ -56,16 +71,58 @@ public class LoggedAccount extends GuestAccount{
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public void pay() {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public void pay() throws UserException {
+		if(cart.getMoneyToPay()<this.money){
+			for (Product product : cart.getProducts()){
+				float price=product.getPrice()*product.getQuantity();
+				product.getSeller().sellProduct(price);
+				this.money-=price;
+			}
+			cart.getProducts().removeAll(cart.getProducts());
+		}else{
+			throw new UserException("Not enough money to buy all items!");
+		}
 	}
 
-	public void addItemForSale(Product product) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public void sellProduct(float moneyFromProdoct) throws UserException{
+		if (money>0){
+			this.money+=moneyFromProdoct;
+		}else{
+			throw new UserException("Cant sell a product that is not yours!");
+		}
 	}
 
-	public void removeItemForSale(Product product) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public void addToCart(Product productFromShop, int quantity) throws ProductException, CartException, UserException{
+		if (this.shop.hasProduct(productFromShop)&&productFromShop!=null){
+			if(productFromShop.getQuantity()>quantity){	
+				cart.addToCart(productFromShop,quantity);
+				productFromShop.decreaseQuantity(quantity);
+			}else{
+				throw new UserException("Desired quantity must be lower then that presented in shop!");
+			}
+		}
+	}
+	
+	public void removeFromCart(Product productFromCart, int quantity) throws ProductException, CartException, UserException{
+		if (this.cart.getProduct(productFromCart)!=null&&productFromCart!=null){
+			if(productFromCart.getQuantity()>quantity){	
+				cart.removeFromCart(productFromCart,quantity);
+				productFromCart.increaseQuantity(quantity);
+			}else{
+				throw new UserException("Desired quantity must be lower then that presented in shop!");
+			}
+		}
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
+
+	@Override
+	public String toString() {
+		return "LoggedAccount [username=" + username + ", money=" + money + "]";
+	}
+
+	
+	
 }

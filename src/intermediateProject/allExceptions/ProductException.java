@@ -1,4 +1,4 @@
-package intermediateProject.allExceptions;
+package src.intermediateProject.allExceptions;
 
 public class ProductException extends Exception {
 
