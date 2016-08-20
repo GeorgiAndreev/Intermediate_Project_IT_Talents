@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Shop {
 
-	private HashMap<String, HashSet<Product>> catalog;
-
+	private Map <String, HashSet<Product>> catalog=new HashMap<String, HashSet<Product>>();
+	
 	public void addItem(Product product) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}

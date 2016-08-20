@@ -1,8 +1,5 @@
 package intermediateProject.allClasses;
 
-import java.io.*;
-import java.util.*;
-
 public class AdminAccount extends LoggedAccount{
 
 	public void removeAccount(LoggedAccount account) {
