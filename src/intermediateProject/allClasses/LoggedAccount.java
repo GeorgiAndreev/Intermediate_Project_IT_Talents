@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import src.intermediateProject.allExceptions.CartException;
+import src.intermediateProject.allExceptions.EventsException;
 import src.intermediateProject.allExceptions.ProductException;
 import src.intermediateProject.allExceptions.UserException;
 
@@ -57,7 +58,7 @@ public class LoggedAccount extends GuestAccount{
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public Event createEvent(String name, String description, int capacity, float price, String type) {
+	public Event createEvent(String name, String description, int capacity, float price, String type) throws EventsException {
 		if (type.equals("single")) {
 			return new Event(name, description, capacity, price);
 		}
