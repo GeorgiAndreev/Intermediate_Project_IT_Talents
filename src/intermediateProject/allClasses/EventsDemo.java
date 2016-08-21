@@ -13,7 +13,8 @@ public class EventsDemo {
 		
 		try {
 			
-			LoggedAccount user1 = new LoggedAccount();
+			LoggedAccount user1 = new LoggedAccount("opalqnka");
+			System.out.println(user1.getPassword());
 
 			Event lekciqPoEkologi4noZemedelie1;
 			
@@ -56,6 +57,25 @@ public class EventsDemo {
 			if (dateCompare == 0) {
 				System.out.println("date equal to today");
 			}
+			
+			System.out.println("\nencryption test");
+			
+			    String password1 = "1234567";
+				StringBuilder sb1 = new StringBuilder("Domat");
+				StringBuilder sb2 = new StringBuilder(password1);
+				StringBuilder sb3 = new StringBuilder("4u6ka");
+				sb2.reverse();
+				sb1.append(sb2);
+				sb1.append(sb3);
+				String encryptedPassword = sb1.toString();
+				System.out.println(encryptedPassword);
+			
+			
+				StringBuilder sb4 = new StringBuilder(encryptedPassword);
+				sb4.reverse();
+				String password2 = sb4.substring(5, encryptedPassword.length() - 5);
+				System.out.println(password2);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
