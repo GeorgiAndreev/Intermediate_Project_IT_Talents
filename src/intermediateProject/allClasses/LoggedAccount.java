@@ -56,6 +56,10 @@ public class LoggedAccount extends User {
 		}
 	}
 
+	protected String decryptPassword(String encryptedPassword) {
+		return this.password.decryptPassword(encryptedPassword);
+	}
+	
 	public void logout() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}

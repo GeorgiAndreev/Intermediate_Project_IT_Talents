@@ -21,7 +21,7 @@ public class AccountsManagement {
 			System.out.println("No account with such email address found.");
 			return false;
 		}
-		if (!(this.allAccounts.get(email).getPassword().equals(password))) {
+		if (!(this.allAccounts.get(email).getPassword().equals(this.allAccounts.get(email).decryptPassword(password)))) {
 			System.out.println("Invalid password.");
 			return false;
 		}
