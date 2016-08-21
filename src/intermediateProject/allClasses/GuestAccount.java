@@ -3,9 +3,7 @@ package src.intermediateProject.allClasses;
 import java.io.*;
 import java.util.*;
 
-public class GuestAccount {
-
-	private WebsiteSystem system;
+public class GuestAccount extends User{
 
 	public void login(String email, String password) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");

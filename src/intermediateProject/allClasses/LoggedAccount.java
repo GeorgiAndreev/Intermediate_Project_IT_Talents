@@ -8,7 +8,7 @@ import src.intermediateProject.allExceptions.EventsException;
 import src.intermediateProject.allExceptions.ProductException;
 import src.intermediateProject.allExceptions.UserException;
 
-public class LoggedAccount extends GuestAccount{
+public class LoggedAccount extends User{
 
 	private String username;
 	private String password;
