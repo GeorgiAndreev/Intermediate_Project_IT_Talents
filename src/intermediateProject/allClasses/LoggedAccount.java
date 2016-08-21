@@ -22,7 +22,7 @@ public class LoggedAccount extends User{
 	private Shop shop;
 	private float money;
 	private String phoneNumber;
-
+	
 	public LoggedAccount(){
 		
 	}
@@ -37,6 +37,19 @@ public class LoggedAccount extends User{
 	public void logout() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
+	
+	// logging version 1 start
+
+	public void logoutVersion1() {
+		this.amILoggedIn = null;
+	}
+
+	// password 6te e vutre6en klas i tuk 6te se vru6ta kriptirana parola
+	public String getPassword() {
+		return password;
+	}
+	
+	// logging version 1 end
 
 	public void removeAccount() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
@@ -123,7 +136,5 @@ public class LoggedAccount extends User{
 	public String toString() {
 		return "LoggedAccount [username=" + username + ", money=" + money + "]";
 	}
-
-	
 	
 }

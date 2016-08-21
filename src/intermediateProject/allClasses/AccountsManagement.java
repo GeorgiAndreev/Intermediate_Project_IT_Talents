@@ -13,5 +13,28 @@ public class AccountsManagement {
 	public void removeAccountFromWebsite(LoggedAccount accountToRemove) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
+	
+	// logging version 1 start
+	
+	private boolean searchForAccount(String email, String password) {
+		if (!(this.allAccounts.containsKey(email))) {
+			System.out.println("No account with such email address found.");
+			return false;
+		}
+		if (!(this.allAccounts.get(email).getPassword().equals(password))) {
+			System.out.println("Invalid password.");
+			return false;
+		}
+		return true;
+	}
+	
+	public LoggedAccount returnAccount(String email, String password){
+		if (!(this.searchForAccount(email, password))) {
+			return null;
+		}
+		return this.allAccounts.get(email);
+	}
+	
+	// logging version 1 end
 
 }
