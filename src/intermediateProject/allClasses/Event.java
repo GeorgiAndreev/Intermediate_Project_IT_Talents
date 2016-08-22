@@ -145,6 +145,29 @@ public class Event {
 				+ ", \ncapacity = " + capacity + ", \nprice = " + price;
 	}
 
+	public void increaseFreePlaces() {
+		if (this.freeSpaces < this.capacity) {
+			this.freeSpaces += 1;
+		} else {
+			System.out.println("Cannot increase free spaces. Maximum capacity ( " + this.capacity + " ) reached.");
+		}
+	}
+	
+	public void decreaseFreePlaces() {
+		if (this.freeSpaces > 0) {
+			this.freeSpaces -= 1;
+		} else {
+			System.out.println("No more free spaces.");
+		}
+	}
+	
+	public boolean hasFreePlaces() {
+		if (this.freeSpaces < this.capacity) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean hasParts() {
 		if (this.eventParts.isEmpty()) {
 			return false;
@@ -205,5 +228,9 @@ public class Event {
 	// public void setEnding(Date ending) {
 	// this.ending = ending;
 	// }
+	
+	public String getName() {
+		return name;
+	}
 
 }

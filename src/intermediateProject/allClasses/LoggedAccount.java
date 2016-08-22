@@ -89,11 +89,31 @@ public class LoggedAccount extends User {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public void signForEvent(Event event) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	/*public void signForEvent(Event event) {
+		if ((event != null) && this.system.getEventsManagement().) {
+			
+		}
 	}
 
 	public void unsignFromEvent(Event event) {
+		throw new UnsupportedOperationException("The method is not implemented yet.");
+	}*/
+	
+	public void addEventToParticipateList(Event event) {
+		this.eventsIParticipateIn.add(event);
+	}
+	
+	public void removeEventFromParticipateList(Event event) {
+		this.eventsIParticipateIn.remove(event);
+	}
+	
+	public void signForEvent(String eventName) {
+		if ((eventName != null) && (!(eventName.equals("")))) {
+			this.system.getEventsManagement().signAccountForEvent(this, eventName);
+		}
+ 	}
+
+	public void unsignFromEvent(String eventName) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
