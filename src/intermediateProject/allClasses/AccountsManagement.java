@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class AccountsManagement {
 
-	private HashMap<String, LoggedAccount> allAccounts;
+	private HashMap<String, LoggedUser> allAccounts;
 	
-	public void addAccountToWebsite(LoggedAccount accountToAdd) {
+	public void addAccountToWebsite(LoggedUser accountToAdd) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 
-	public void removeAccountFromWebsite(LoggedAccount accountToRemove) {
+	public void removeAccountFromWebsite(LoggedUser accountToRemove) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 	
@@ -28,7 +28,7 @@ public class AccountsManagement {
 		return true;
 	}
 	
-	public LoggedAccount returnAccount(String email, String password){
+	public LoggedUser returnAccount(String email, String password){
 		if (!(this.searchForAccount(email, password))) {
 			return null;
 		}

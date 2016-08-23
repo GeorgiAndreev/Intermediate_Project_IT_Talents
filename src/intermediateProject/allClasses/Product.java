@@ -12,11 +12,11 @@ public class Product {
 	private String name;
 	private String description;
 	private float price;
-	private LoggedAccount seller;
+	private LoggedUser seller;
 	private int quantity;
 
 	
-	public Product(String name, String description, float price, LoggedAccount seller, int quantity) throws ProductException {
+	public Product(String name, String description, float price, LoggedUser seller, int quantity) throws ProductException {
 		if (name!=null&&name.length()>1){
 			this.name = name;
 		}else{
@@ -44,7 +44,7 @@ public class Product {
 		}
 	}
 	
-	public Product(String name, float price, LoggedAccount seller, int quantity) throws ProductException {
+	public Product(String name, float price, LoggedUser seller, int quantity) throws ProductException {
 		if (name!=null&&name.length()>1){
 			this.name = name;
 		}else{
@@ -87,7 +87,7 @@ public class Product {
 		return price;
 	}
 
-	public LoggedAccount getSeller() {
+	public LoggedUser getSeller() {
 		return seller;
 	}
 

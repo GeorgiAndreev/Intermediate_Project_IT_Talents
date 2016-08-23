@@ -13,7 +13,14 @@ public class EventsDemo {
 		
 		try {
 			
-			LoggedAccount user1 = new LoggedAccount("opalqnka");
+			WebsiteSystem website = new WebsiteSystem();
+			AccountsManagement accountsManagement = new AccountsManagement();
+			EventsManagement eventsManagement = new EventsManagement();
+			website.addAccountsManagement(accountsManagement);
+			website.addEventsManagement(eventsManagement);
+			
+			LoggedUser user1 = new LoggedUser("opalqnka", website);
+			LoggedUser user2 = new LoggedUser("parola", website);
 			System.out.println(user1.getPassword());
 
 			Event lekciqPoEkologi4noZemedelie1;
@@ -25,6 +32,14 @@ public class EventsDemo {
 
 			System.out.println(lekciqPoEkologi4noZemedelie1);
 			System.out.println(kursPoPletene1);
+			
+			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getName());
+			
+			eventsManagement.addEventToCenter(lekciqPoEkologi4noZemedelie1);
+			
+			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getName());
+			
+			System.out.println(lekciqPoEkologi4noZemedelie1);
 
 			System.out.println("\nDates testing");
 

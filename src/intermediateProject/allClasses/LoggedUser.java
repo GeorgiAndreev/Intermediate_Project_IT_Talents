@@ -8,7 +8,7 @@ import src.intermediateProject.allExceptions.EventsException;
 import src.intermediateProject.allExceptions.ProductException;
 import src.intermediateProject.allExceptions.UserException;
 
-public class LoggedAccount extends User {
+public class LoggedUser extends User {
 
 	private String username;
 	private String encryptedPassword;
@@ -23,12 +23,19 @@ public class LoggedAccount extends User {
 	private Shop shop;
 	private float money;
 	private String phoneNumber;
-
-	public LoggedAccount(String password) {
-		this.encryptedPassword = this.password.encryptPassword(password);
+	
+	public LoggedUser(WebsiteSystem system) {
+		super(system);
+		// TODO Auto-generated constructor stub
 	}
 
-	public LoggedAccount(String username, Shop shop, float money) {
+	public LoggedUser(String password, WebsiteSystem website) {
+		this(website);
+		this.encryptedPassword = this.password.encryptPassword(password);
+		this.money = 1000;
+	}
+
+	public LoggedUser(String username, Shop shop, float money) {
 		this.username = username;
 		this.cart = new Cart();
 		this.shop = shop;
@@ -67,7 +74,7 @@ public class LoggedAccount extends User {
 	// logging version 1 start
 
 	public void logoutVersion1() {
-		this.amILoggedIn = null;
+		setAmILoggedIn(null);;
 	}
 
 	// password 6te e vutre6en klas i tuk 6te se vru6ta kriptirana parola
@@ -108,13 +115,19 @@ public class LoggedAccount extends User {
 	}
 	
 	public void signForEvent(String eventName) {
-		if ((eventName != null) && (!(eventName.equals("")))) {
-			this.system.getEventsManagement().signAccountForEvent(this, eventName);
+		if ((eventName != null) && (!(eventName.equals("") && (this.getSystem().getEventsManagement()!= null)))) {
+			this.getSystem().getEventsManagement().signAccountForEvent(this, eventName);
 		}
  	}
 
 	public void unsignFromEvent(String eventName) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
+	}
+	
+	public void payForEvent(Event event) {
+		if (this.money >= event.getPrice()) {
+			this.money -= event.getPrice();
+		}
 	}
 
 	public Event createEvent(String name, String description, int capacity, float price, String type)

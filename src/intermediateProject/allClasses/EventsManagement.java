@@ -17,23 +17,24 @@ public class EventsManagement {
 		return true;
 	}
 
-	public void signAccountForEvent(LoggedAccount account, String eventName) {
+	public void signAccountForEvent(LoggedUser account, String eventName) {
 		if (!(this.searchForEvent(eventName))) {
-			System.out.println("No event with such name found.");
+			System.out.println("\nNo event with such name found.");
 			return;
 		}
 		if (!(this.allEventsInCenter.get(eventName).hasFreePlaces())) {
-			System.out.println("No free places for this event left.");
+			System.out.println("\nNo free places for this event left.");
 			return;
 		}
 		this.allEventsInCenter.get(eventName).addParticipant(account);
 		this.allEventsInCenter.get(eventName).decreaseFreePlaces();
 		account.addEventToParticipateList(this.allEventsInCenter.get(eventName));
+		System.out.println("\nYou signed for event successfully!");
 	}
 	
-	public void unsignAccountForEvent(LoggedAccount account, String eventName) {
+	public void unsignAccountForEvent(LoggedUser account, String eventName) {
 		if (!(this.searchForEvent(eventName))) {
-			System.out.println("No event with such name found.");
+			System.out.println("\nNo event with such name found.");
 			return;
 		}
 		this.allEventsInCenter.get(eventName).removeParticipant(account);
@@ -74,8 +75,9 @@ public class EventsManagement {
 		this.eventsWaitingForApproval.remove(eventToRemove.getName());
 	}
 
-	public void sellPlaceForEvent(LoggedAccount participant, Event event) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+	public void sellPlaceForEvent(LoggedUser participant, Event event) {
+		this.moneyGainedFromEvents += event.getPrice();
+		participant.payForEvent(event);
 	}
 
 }

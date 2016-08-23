@@ -12,6 +12,15 @@ public class WebsiteSystem {
 	public AccountsManagement getAccountsManagement() {
 		return accountsManagement;
 	}
+	
+	public void addAccountsManagement(AccountsManagement accountsManagement) {
+		this.accountsManagement = accountsManagement;
+	}
+	
+	public void addEventsManagement(EventsManagement eventsManagement) {
+		this.eventsManagement = eventsManagement;
+	}
+	
 	public Shop getShop() {
 		return shop;
 	}

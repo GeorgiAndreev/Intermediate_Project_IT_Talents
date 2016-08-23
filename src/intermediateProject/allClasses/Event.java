@@ -17,11 +17,11 @@ public class Event {
 	private SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	private Date beginning;
 	private Date ending;
-	private TreeSet<PartOfEvent> eventParts = new TreeSet<PartOfEvent>();
-	private HashSet<LoggedAccount> teachers = new HashSet<LoggedAccount>();
-	private HashSet<LoggedAccount> participants = new HashSet<LoggedAccount>();
+	private Set<PartOfEvent> eventParts = new TreeSet<PartOfEvent>();
+	private Set<LoggedUser> teachers = new HashSet<LoggedUser>();
+	private Set<LoggedUser> participants = new HashSet<LoggedUser>();
 
-	public Event(String name, String description, int capacity, float price, Date beginning, Date ending, LoggedAccount teacher) throws EventsException {
+	public Event(String name, String description, int capacity, float price, Date beginning, Date ending, LoggedUser teacher) throws EventsException {
 		if ((name != null) && (!name.equals(""))) {
 			this.name = name;
 		} else {
@@ -162,7 +162,7 @@ public class Event {
 	}
 	
 	public boolean hasFreePlaces() {
-		if (this.freeSpaces < this.capacity) {
+		if (this.freeSpaces <= this.capacity) {
 			return true;
 		}
 		return false;
@@ -175,7 +175,7 @@ public class Event {
 		return true;
 	}
 
-	public void addTeacher(LoggedAccount teacher) throws EventsException {
+	public void addTeacher(LoggedUser teacher) throws EventsException {
 		if (teacher == null) {
 			System.out.println("Invalid teacher input.");
 			return;
@@ -186,7 +186,7 @@ public class Event {
 		this.teachers.add(teacher);
 	}
 
-	public void removeTeacher(LoggedAccount teacher) {
+	public void removeTeacher(LoggedUser teacher) {
 		if (teacher == null) {
 			System.out.println("Invalid teacher input.");
 			return;
@@ -194,7 +194,7 @@ public class Event {
 		this.teachers.remove(teacher);
 	}
 
-	public void addParticipant(LoggedAccount participant) {
+	public void addParticipant(LoggedUser participant) {
 		if (participant == null) {
 			System.out.println("Invalid participant input.");
 			return;
@@ -205,7 +205,7 @@ public class Event {
 		this.participants.add(participant);
 	}
 
-	public void removeParticipant(LoggedAccount participant) {
+	public void removeParticipant(LoggedUser participant) {
 		if (participant == null) {
 			System.out.println("Invalid participant input.");
 			return;
@@ -231,6 +231,10 @@ public class Event {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public float getPrice() {
+		return price;
 	}
 
 }

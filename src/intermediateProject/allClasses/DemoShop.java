@@ -9,8 +9,8 @@ public class DemoShop {
 
 	public static void main(String[] args) {
 		Shop shop=new Shop();
-		LoggedAccount acc=new LoggedAccount("gosho",shop,500.50f);
-		LoggedAccount acc1=new LoggedAccount("pesho",shop,450.50f);
+		LoggedUser acc=new LoggedUser("gosho",shop,500.50f);
+		LoggedUser acc1=new LoggedUser("pesho",shop,450.50f);
 		try {
 			Product product =new Product("Chesan" , "za qdene", 2.50f , acc, 100);
 			shop.addItemToShop(Categories.ACCESOARES, product);
