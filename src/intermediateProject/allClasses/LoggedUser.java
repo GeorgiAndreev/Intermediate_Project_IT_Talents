@@ -1,6 +1,8 @@
 package src.intermediateProject.allClasses;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import src.intermediateProject.allExceptions.CartException;
@@ -150,15 +152,34 @@ public class LoggedUser extends User {
 		}
 	}
 
-	public Event createEvent(String name, String description, int capacity, float price, String type)
-			throws EventsException {
-		if (type.equals("single")) {
-			return new Event(name, description, capacity, price);
+	public Event createEvent(String name, String description, int capacity, float price, String beginningDate, String endingDate, int numberOfSubevents)
+			throws EventsException, ParseException {
+		Event event = new Event(name, description, capacity, price, beginningDate, endingDate, this);
+		//Event event = new Event(name, description, capacity, price);
+		String subeventName = null;
+		String subeventDescription = null;
+		String subeventBeginningString = null;
+		String subeventEndingString = null;
+		Date subeventBeginning = null;
+		Date subeventEnding = null;
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		
+		for (int subevent = 1; subevent <= numberOfSubevents; subevent++) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Insert part ¹ " + subevent + " name: ");
+			subeventName = sc.nextLine();
+			System.out.println("Insert part ¹ " + subevent + " description: ");
+			subeventDescription = sc.nextLine();
+			System.out.println("Insert part ¹ " + subevent + " beginning: ");
+			subeventBeginningString = sc.nextLine();
+			System.out.println("Insert part ¹ " + subevent + " ending: ");
+			subeventEndingString = sc.nextLine();			
+			//event.addSubevent(new Event(subeventName,subeventDescription,subeventCapacity,subeventPrice));
+			event.addPartOfEvent(subeventName, subeventDescription, dateFormat1.parse(subeventBeginningString), dateFormat1.parse(subeventEndingString));
+			sc.close();
 		}
-		if (type.equals("multiple")) {
-			return new MultidayEvent(name, description, capacity, price);
-		}
-		return null;
+		
+		return event;
 	}
 	
 	public void addEventToWebsite(Event event) {

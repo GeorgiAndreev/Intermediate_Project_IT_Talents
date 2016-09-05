@@ -31,9 +31,9 @@ public class EventsDemo {
 			Event lekciqPoEkologi4noZemedelie1;
 			
 			lekciqPoEkologi4noZemedelie1 = user1.createEvent("lekciq po ekologi4no zemedelie",
-					"kak da proizvejdame rasteniq za qdene ekologi4no", 30, 20, "single");
-			MultidayEvent kursPoPletene1 = (MultidayEvent) user1.createEvent("kurs po pletene za maniqci",
-					"qko 6te se plete tuka!", 15, 60f, "multiple");
+					"kak da proizvejdame rasteniq za qdene ekologi4no", 30, 20," 03/03/2017 12:00", "03/03/2017 15:00", 0);
+			Event kursPoPletene1 = user1.createEvent("kurs po pletene za maniqci",
+					"qko 6te se plete tuka!", 15, 60f, " 04/03/2017 12:00", "04/03/2017 17:00", 0);
 			
 			user1.addEventToWebsite(lekciqPoEkologi4noZemedelie1);
 			user1.addEventToWebsite(kursPoPletene1);

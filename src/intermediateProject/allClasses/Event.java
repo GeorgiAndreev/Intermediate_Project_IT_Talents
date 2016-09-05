@@ -1,9 +1,9 @@
 package src.intermediateProject.allClasses;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import src.intermediateProject.allExceptions.EventsException;
 import src.intermediateProject.allExceptions.PartOfEventException;
 
@@ -12,6 +12,7 @@ public class Event {
 	private long id;
 	private static long nextId;
 	private String name;
+	private String teachersNames;
 	private String description;
 	private int freeSpaces;
 	private int capacity;
@@ -23,9 +24,9 @@ public class Event {
 	private Set<PartOfEvent> eventParts = new TreeSet<PartOfEvent>();
 	private Set<LoggedUser> teachers = new HashSet<LoggedUser>();
 	private Set<LoggedUser> participants = new HashSet<LoggedUser>();
-	private String eventCreator = "admin";
-
-	public Event(String name, String description, int capacity, float price, Date beginning, Date ending, LoggedUser teacher) throws EventsException {
+	private LoggedUser eventCreator;
+	
+	public Event(String name, String description, int capacity, float price, Date beginning, Date ending, LoggedUser eventCreator) throws EventsException {
 		if ((name != null) && (!name.equals(""))) {
 			this.name = name;
 		} else {
@@ -58,8 +59,51 @@ public class Event {
 		} else {
 			throw new EventsException("Invalid ending input.");
 		}
-		if (teacher != null) {
-			this.teachers.add(teacher);
+		if (eventCreator != null) {
+			this.eventCreator = eventCreator;
+		} else {
+			throw new EventsException("Invalid teacher input.");
+		}
+		this.id = Event.nextId++;
+	}
+	
+	public Event(String name, String description, int capacity, float price, String beginningDate, String endingDate, LoggedUser eventCreator) throws EventsException, ParseException {
+		if ((name != null) && (!name.equals(""))) {
+			this.name = name;
+		} else {
+			throw new EventsException("Invalid name input.");
+		}
+		if ((description != null) && (!description.equals(""))) {
+			this.description = description;
+		} else {
+			throw new EventsException("Invalid description input.");
+		}
+		if (capacity > 0) {
+			this.capacity = capacity;
+		} else {
+			throw new EventsException("Invalid capacity input.");
+		}
+		this.freeSpaces = capacity;
+		if (price >= 0) {
+			this.price = price;
+		} else {
+			throw new EventsException("Invalid price input.");
+		}
+		Date now = new Date();
+		Date beginning = dateFormat1.parse(beginningDate);
+		Date ending = dateFormat1.parse(endingDate);
+		if ((beginning != null) && (!beginning.equals("")) && (beginning.compareTo(ending) < 0) && beginning.compareTo(now) > 0) {
+			this.beginning = beginning;
+		} else {
+			throw new EventsException("Invalid beginning input.");
+		}
+		if ((ending != null) && (!ending.equals(""))) {
+			this.ending = ending;
+		} else {
+			throw new EventsException("Invalid ending input.");
+		}
+		if (eventCreator != null) {
+			this.eventCreator = eventCreator;
 		} else {
 			throw new EventsException("Invalid teacher input.");
 		}
@@ -91,7 +135,15 @@ public class Event {
 		this.id = Event.nextId++;
 	}
 
-	public void addPartOfEvent(Date beginning, Date ending, String description) throws PartOfEventException {
+	public void addPartOfEvent(String name, String description, Date beginning, Date ending) throws PartOfEventException {
+		if ((name == null) || (name.equals(""))) {
+			System.out.println("Invalid name input.");
+			return;
+		}
+		if ((description == null) || (description.equals(""))) {
+			System.out.println("Invalid description input.");
+			return;
+		}
 		if (beginning.compareTo(ending) >= 0) {
 			System.out.println("Invalid beginning or endeng input.");
 			return;
@@ -104,20 +156,28 @@ public class Event {
 			System.out.println("Invalid ending input.");
 			return;
 		}
-		if ((description == null) || (description.equals(""))) {
-			System.out.println("Invalid description input.");
-			return;
-		}
-		this.eventParts.add(new PartOfEvent(beginning, ending, description));
+		this.eventParts.add(new PartOfEvent(name, description, beginning, ending));
 	}
 
-	private class PartOfEvent implements Comparable<PartOfEvent> {
+	public class PartOfEvent implements Comparable<PartOfEvent> {
 
+		private String name;
+		private String description;
 		private Date beginning;
 		private Date ending;
-		private String description;
+		
 
-		public PartOfEvent(Date beginning, Date ending, String description) throws PartOfEventException {
+		public PartOfEvent(String name, String description, Date beginning, Date ending) throws PartOfEventException {
+			if ((name != null) && (!name.equals(""))) {
+				this.name = name;
+			} else {
+				throw new PartOfEventException("Invalid name input.");
+			}
+			if ((description != null) && (!description.equals(""))) {
+				this.description = description;
+			} else {
+				throw new PartOfEventException("Invalid description input.");
+			}
 			if (beginning.compareTo(ending) >= 0) {
 				throw new PartOfEventException("Invalid beginning or ending date.");
 			}
@@ -126,16 +186,11 @@ public class Event {
 			} else {
 				throw new PartOfEventException("Invalid date for beginning.");
 			}
-			if ((ending != null) && (!ending.equals("")) && (ending.compareTo(Event.this.ending) >= 0)) {
+			if ((ending != null) && (!ending.equals("")) && (ending.compareTo(Event.this.ending) < 0)) {
 				this.ending = ending;
 			} else {
 				throw new PartOfEventException("Invalid date for ending.");
-			}
-			if ((description != null) && (!description.equals(""))) {
-				this.description = description;
-			} else {
-				throw new PartOfEventException("Invalid description input.");
-			}
+			} 
 		}
 
 		@Override
@@ -244,18 +299,6 @@ public class Event {
 
 	public long getId() {
 		return id;
-	}
-
-	public static long getNextId() {
-		return nextId;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public static void setNextId(long nextId) {
-		Event.nextId = nextId;
 	}
 
 }
