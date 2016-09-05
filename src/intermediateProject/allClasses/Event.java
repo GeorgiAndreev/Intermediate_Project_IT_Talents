@@ -8,18 +8,22 @@ import src.intermediateProject.allExceptions.EventsException;
 import src.intermediateProject.allExceptions.PartOfEventException;
 
 public class Event {
-
+	
+	private long id;
+	private static long nextId;
 	private String name;
 	private String description;
 	private int freeSpaces;
 	private int capacity;
 	private float price;
 	private SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+	private SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
 	private Date beginning;
 	private Date ending;
 	private Set<PartOfEvent> eventParts = new TreeSet<PartOfEvent>();
 	private Set<LoggedUser> teachers = new HashSet<LoggedUser>();
 	private Set<LoggedUser> participants = new HashSet<LoggedUser>();
+	private String eventCreator = "admin";
 
 	public Event(String name, String description, int capacity, float price, Date beginning, Date ending, LoggedUser teacher) throws EventsException {
 		if ((name != null) && (!name.equals(""))) {
@@ -59,7 +63,7 @@ public class Event {
 		} else {
 			throw new EventsException("Invalid teacher input.");
 		}
-		
+		this.id = Event.nextId++;
 	}
 
 	public Event(String name, String description, int capacity, float price) throws EventsException {
@@ -84,6 +88,7 @@ public class Event {
 		} else {
 			throw new EventsException("Invalid price input.");
 		}
+		this.id = Event.nextId++;
 	}
 
 	public void addPartOfEvent(Date beginning, Date ending, String description) throws PartOfEventException {
@@ -235,6 +240,22 @@ public class Event {
 	
 	public float getPrice() {
 		return price;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public static long getNextId() {
+		return nextId;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public static void setNextId(long nextId) {
+		Event.nextId = nextId;
 	}
 
 }

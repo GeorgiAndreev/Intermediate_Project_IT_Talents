@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class AccountsManagement {
 
-	private HashMap<String, LoggedUser> allAccounts;
+	private HashMap<String, LoggedUser> allAccounts = new HashMap<String, LoggedUser>();
 	
 	public void addAccountToWebsite(LoggedUser accountToAdd) {
-		throw new UnsupportedOperationException("The method is not implemented yet.");
+		this.allAccounts.put(accountToAdd.getEmail(), accountToAdd);
+		System.out.println("You registered successfully.");
 	}
 
 	public void removeAccountFromWebsite(LoggedUser accountToRemove) {
@@ -21,7 +22,8 @@ public class AccountsManagement {
 			System.out.println("No account with such email address found.");
 			return false;
 		}
-		if (!(this.allAccounts.get(email).getPassword().equals(this.allAccounts.get(email).decryptPassword(password)))) {
+		//if (!(this.allAccounts.get(email).getPassword().equals(this.allAccounts.get(email).decryptPassword(password)))) {
+		if (!(this.allAccounts.get(email).getPassWord().equals(password))) {
 			System.out.println("Invalid password.");
 			return false;
 		}

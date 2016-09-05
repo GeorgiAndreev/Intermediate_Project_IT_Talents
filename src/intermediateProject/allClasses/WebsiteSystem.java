@@ -9,6 +9,19 @@ public class WebsiteSystem {
 	private Shop shop;
 	private EventsManagement eventsManagement;
 	
+	public WebsiteSystem() {
+		super();
+	}
+
+	public WebsiteSystem(AccountsManagement accountsManagement, EventsManagement eventsManagement, Shop shop) {
+		super();
+		this.accountsManagement = accountsManagement;
+		this.eventsManagement = eventsManagement;
+		this.shop = shop;
+		AdminAccount admin = new AdminAccount("admin", "admin");
+	    accountsManagement.addAccountToWebsite(admin);
+	}
+
 	public AccountsManagement getAccountsManagement() {
 		return accountsManagement;
 	}

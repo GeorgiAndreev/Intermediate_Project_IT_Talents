@@ -9,21 +9,41 @@ import src.intermediateProject.allExceptions.ProductException;
 import src.intermediateProject.allExceptions.UserException;
 
 public class LoggedUser extends User {
-
-	private String username;
-	private String encryptedPassword;
-	private Password password = new Password();
-	private String email;
+	
 	private String firstName;
 	private String lastName;
+	private String username;
+	private String email;
 	private String address;
+	private String phoneNumber;
+	private String passWord;
+	private String encryptedPassword;
+	private Password password = new Password();
 	private Cart cart;
 	private Set<Event> eventsIParticipateIn = new HashSet<Event>();
 	private Set<Event> eventsITeachIn = new HashSet<Event>();
 	private Shop shop;
 	private float money;
-	private String phoneNumber;
 	
+	
+	public LoggedUser(String firstName, String lastName, String username, String email, String address,
+			String phoneNumber, String passWord) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.passWord = passWord;
+	}
+
+	public LoggedUser(String email, String passWord) {
+		super();
+		this.email = email;
+		this.passWord = passWord;
+	}
+
 	public LoggedUser(WebsiteSystem system) {
 		super(system);
 		// TODO Auto-generated constructor stub
@@ -114,13 +134,13 @@ public class LoggedUser extends User {
 		this.eventsIParticipateIn.remove(event);
 	}
 	
-	public void signForEvent(String eventName) {
-		if ((eventName != null) && (!(eventName.equals("") && (this.getSystem().getEventsManagement()!= null)))) {
-			this.getSystem().getEventsManagement().signAccountForEvent(this, eventName);
+	public void signForEvent(Long eventId) {
+		if ((eventId > 0) && (this.getSystem().getEventsManagement()!= null)) {
+			this.getSystem().getEventsManagement().signAccountForEvent(this, eventId);
 		}
  	}
 
-	public void unsignFromEvent(String eventName) {
+	public void unsignFromEvent(Long eventId) {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
 	}
 	
@@ -139,6 +159,10 @@ public class LoggedUser extends User {
 			return new MultidayEvent(name, description, capacity, price);
 		}
 		return null;
+	}
+	
+	public void addEventToWebsite(Event event) {
+		this.getSystem().getEventsManagement().addEventToWaitingForApprovalList(event);
 	}
 
 	public void removeEvent(Event event) {
@@ -196,6 +220,14 @@ public class LoggedUser extends User {
 	@Override
 	public String toString() {
 		return "LoggedAccount [username=" + username + ", money=" + money + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getPassWord() {
+		return passWord;
 	}
 
 }

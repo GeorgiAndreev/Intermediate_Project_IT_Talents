@@ -16,11 +16,12 @@ public class GuestUser extends User{
 	
 	// login version 1 start
 	
-	public void loginVersion1(String email, String password) {
+	public void login1(String email, String password) {
 		if (this.getSystem().getAccountsManagement().returnAccount(email, password) == null) {
 			System.out.println("Login denied.");
 		} else {
-			getAmILoggedIn().setAmILoggedIn(this.getSystem().getAccountsManagement().returnAccount(email, password)); 
+			System.out.println("Login successfull.");
+			this.setAmILoggedIn(this.getSystem().getAccountsManagement().returnAccount(email, password)); 
 		}
 	}
 	
@@ -28,6 +29,12 @@ public class GuestUser extends User{
 
 	public void register() {
 		throw new UnsupportedOperationException("The method is not implemented yet.");
+	}
+
+	public boolean register1(String firstName, String lastName, String username, String email, String address, String phoneNumber, String password) {
+		LoggedUser registerUser = new LoggedUser(firstName, lastName, username, email, address, phoneNumber, password);
+		this.getSystem().getAccountsManagement().addAccountToWebsite(registerUser);
+		return true;
 	}
 
 }

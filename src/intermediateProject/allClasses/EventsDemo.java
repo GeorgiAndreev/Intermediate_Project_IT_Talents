@@ -13,14 +13,19 @@ public class EventsDemo {
 		
 		try {
 			
-			WebsiteSystem website = new WebsiteSystem();
+			/*WebsiteSystem website = new WebsiteSystem();
 			AccountsManagement accountsManagement = new AccountsManagement();
 			EventsManagement eventsManagement = new EventsManagement();
 			website.addAccountsManagement(accountsManagement);
-			website.addEventsManagement(eventsManagement);
+			website.addEventsManagement(eventsManagement);*/		
 			
-			LoggedUser user1 = new LoggedUser("opalqnka", website);
-			LoggedUser user2 = new LoggedUser("parola", website);
+			GuestUser gu1 = new GuestUser(ThisWebsite.website);
+			gu1.register1("go6o", "otpo4ivka", "go6", "email", "address", "88888", "password");
+			GuestUser gu2 = new GuestUser(ThisWebsite.website);
+			gu2.login1("email", "password");
+			
+			LoggedUser user1 = new LoggedUser("opalqnka", ThisWebsite.website);
+			LoggedUser user2 = new LoggedUser("parola", ThisWebsite.website);
 			System.out.println(user1.getPassword());
 
 			Event lekciqPoEkologi4noZemedelie1;
@@ -29,15 +34,18 @@ public class EventsDemo {
 					"kak da proizvejdame rasteniq za qdene ekologi4no", 30, 20, "single");
 			MultidayEvent kursPoPletene1 = (MultidayEvent) user1.createEvent("kurs po pletene za maniqci",
 					"qko 6te se plete tuka!", 15, 60f, "multiple");
+			
+			user1.addEventToWebsite(lekciqPoEkologi4noZemedelie1);
+			user1.addEventToWebsite(kursPoPletene1);
 
 			System.out.println(lekciqPoEkologi4noZemedelie1);
 			System.out.println(kursPoPletene1);
 			
-			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getName());
+			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getId());
 			
-			eventsManagement.addEventToCenter(lekciqPoEkologi4noZemedelie1);
+			ThisWebsite.eventsManagement.addEventToCenter(lekciqPoEkologi4noZemedelie1);
 			
-			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getName());
+			user2.signForEvent(lekciqPoEkologi4noZemedelie1.getId());
 			
 			System.out.println(lekciqPoEkologi4noZemedelie1);
 
